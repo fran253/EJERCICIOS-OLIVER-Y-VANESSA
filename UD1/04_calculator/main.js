@@ -5,9 +5,12 @@
 // División
 
 
-// define variables
-let x, y;
+// Define variables
+let x = 10;
+let y = 5;
 
-
-// print sum, substract, multiply and divide
-console.log('something')
+// Print sum, subtract, multiply, and divide
+console.log('Suma:', x + y);
+console.log('Resta:', x - y);
+console.log('Multiplicación:', x * y);
+console.log('División:', x / y);
