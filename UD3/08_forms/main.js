@@ -1,11 +1,11 @@
 window.addEventListener("load", function() {
     // Referencias a los elementos del formulario
-    const btnEnviar = document.querySelector("#submit");
-    const chkCondiciones = document.querySelector("#condiciones");
-    const chkPrivacidad = document.querySelector("#privacidad");
-    const rdbSi = document.querySelector("#pregunta_si");
-    const rdbNo = document.querySelector("#pregunta_no");
-    const cmbOpciones = document.querySelector("#opciones");
+    const botonEnviar = document.getElementById("submit");
+    const checkCondiciones = document.getElementById("condiciones");
+    const checkPrivacidad = document.getElementById("privacidad");
+    const radioSi = document.getElementById("pregunta_si");
+    const radioNo = document.getElementById("pregunta_no");
+    const selectOpciones = document.getElementById("opciones");
     const txtNombre = document.forms["main_form"]["name"];
     const txtApellidos = document.forms["main_form"]["surname"];
     const txtDescripcion = document.forms["main_form"]["description"];
