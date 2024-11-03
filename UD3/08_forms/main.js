@@ -1,15 +1,59 @@
-window.onload = function() {
-    console.log(document.main_form.elements)
+window.addEventListener("load", function() {
+    // Referencias a los elementos del formulario
+    const btnEnviar = document.querySelector("#submit");
+    const chkCondiciones = document.querySelector("#condiciones");
+    const chkPrivacidad = document.querySelector("#privacidad");
+    const rdbSi = document.querySelector("#pregunta_si");
+    const rdbNo = document.querySelector("#pregunta_no");
+    const cmbOpciones = document.querySelector("#opciones");
+    const txtNombre = document.forms["main_form"]["name"];
+    const txtApellidos = document.forms["main_form"]["surname"];
+    const txtDescripcion = document.forms["main_form"]["description"];
 
-    console.log(document.getElementById('pregunta_si').value)
-    console.log(document.getElementById('pregunta_si').checked)
+    btnEnviar.disabled = true;
+    cmbOpciones.disabled = true;
 
-    document.getElementById('pregunta_si').onchange = changeValue
-    document.getElementById('pregunta_no').onchange = changeValue
+    // FUNCIONES
+    function actualizarEstadoBoton() {
+        btnEnviar.disabled = !(chkCondiciones.checked && chkPrivacidad.checked);
+    }
+    // El combo de opciones sólo estará habilitado si se pulsa “si” en el primer check
+    function actualizarEstadoCombo() {
+        cmbOpciones.disabled = !rdbSi.checked;
+    }
 
     
-}
+    function comprobarFormulario(event) {
+        const nombre = txtNombre.value.trim();
+        const apellidos = txtApellidos.value.trim();
 
-function changeValue(e) {
-     console.log('changed' + e.target.value)
-}
+        // Implementar algún mecanismo para prevenir el doble submit
+        if (nombre === "" || apellidos === "") {
+            alert("Por favor, rellena los campos de Nombre y Apellidos.");
+            event.preventDefault();
+            return;
+        }
+
+        // Implementar algún mecanismo para prevenir el doble submit
+        btnEnviar.disabled = true;
+    }
+
+    // El tamaño máximo de la descripción es de 80 carácteres
+    txtDescripcion.addEventListener("input", function() {
+        if (txtDescripcion.value.length > 80) {
+            txtDescripcion.value = txtDescripcion.value.slice(0, 80);
+            alert("La descripción no puede superar los 80 caracteres.");
+        }
+    });
+
+    // Asignar eventos
+    chkCondiciones.addEventListener("change", actualizarEstadoBoton);
+    chkPrivacidad.addEventListener("change", actualizarEstadoBoton);
+    rdbSi.addEventListener("change", actualizarEstadoCombo);
+    rdbNo.addEventListener("change", actualizarEstadoCombo);
+
+
+    btnEnviar.addEventListener("click", function(event) {
+        comprobarFormulario(event);
+    });
+});
